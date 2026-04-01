@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+  <h1>Assessment Result</h1>
+  <p>Submission completed successfully for <strong>{{ student_name }}</strong>.</p>
+</div>
+<div class="card">
+  <h2>Your Personality Type: {{ personality }}</h2>
+  <p>{{ description }}</p>
+  <div class="grid grid-2">
+    <div class="card" style="margin:0"><h3>E / I</h3><p>E: {{ scores['E'] }} | I: {{ scores['I'] }}</p></div>
+    <div class="card" style="margin:0"><h3>S / N</h3><p>S: {{ scores['S'] }} | N: {{ scores['N'] }}</p></div>
+    <div class="card" style="margin:0"><h3>T / F</h3><p>T: {{ scores['T'] }} | F: {{ scores['F'] }}</p></div>
+    <div class="card" style="margin:0"><h3>J / P</h3><p>J: {{ scores['J'] }} | P: {{ scores['P'] }}</p></div>
+  </div>
+  <p class="muted">This result is also stored in the admin dashboard with the student details.</p>
+  <a class="btn" href="{{ url_for('index') }}">Back to Student Portal</a>
+</div>
+{% endblock %}

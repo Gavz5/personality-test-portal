@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+  <h1>Student Personality Test Portal</h1>
+  <p>This portal includes the 60-question MBTI-style assessment with four sections: E/I, S/N, T/F, and J/P. Each section has 15 questions and the final result is generated instantly after submission.</p>
+</div>
+
+<form method="post" action="{{ url_for('submit') }}">
+  <div class="card">
+    <h2>Student Details</h2>
+    <div class="grid grid-2">
+      <div><label>Full Name *</label><input type="text" name="full_name" required></div>
+      <div><label>Email *</label><input type="email" name="email" required></div>
+      <div><label>Student ID</label><input type="text" name="student_id"></div>
+      <div><label>Course</label><input type="text" name="course" placeholder="MBA / BBA / BCA / MCA"></div>
+      <div><label>Department</label><input type="text" name="department"></div>
+      <div><label>Year / Semester</label><input type="text" name="year_semester"></div>
+      <div><label>Section</label><input type="text" name="section_name"></div>
+      <div><label>Phone</label><input type="text" name="phone"></div>
+    </div>
+  </div>
+
+  {% for q in questions %}
+  <div class="card">
+    <div class="pill">Question {{ q.id }}</div>
+    <div class="pill">{{ q.section }}</div>
+    <div class="question-title">{{ q.text }}</div>
+    <label class="option"><input type="radio" name="q{{ q.id }}" value="A" required> <strong>A.</strong> {{ q.a }}</label>
+    <label class="option"><input type="radio" name="q{{ q.id }}" value="B" required> <strong>B.</strong> {{ q.b }}</label>
+  </div>
+  {% endfor %}
+
+  <button class="btn" type="submit">Submit and View Result</button>
+</form>
+{% endblock %}

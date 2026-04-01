@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+  <h1>Admin Dashboard</h1>
+  <p>View all submissions, personality results, and export the full dataset.</p>
+  <a class="btn" href="{{ url_for('admin_export') }}">Export CSV</a>
+  <a class="btn secondary" href="{{ url_for('admin_logout') }}">Logout</a>
+</div>
+
+<div class="card">
+  <h2>Summary</h2>
+  {% if stats %}
+    {% for item in stats %}
+      <span class="pill">{{ item['personality_type'] }} : {{ item['total'] }}</span>
+    {% endfor %}
+  {% else %}
+    <p class="muted">No submissions yet.</p>
+  {% endif %}
+</div>
+
+<div class="card table-wrap">
+  <h2>Submissions</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Student ID</th>
+        <th>Course</th>
+        <th>Department</th>
+        <th>Year/Sem</th>
+        <th>Section</th>
+        <th>Phone</th>
+        <th>Type</th>
+        <th>E</th>
+        <th>I</th>
+        <th>S</th>
+        <th>N</th>
+        <th>T</th>
+        <th>F</th>
+        <th>J</th>
+        <th>P</th>
+        <th>Submitted At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row['id'] }}</td>
+        <td>{{ row['full_name'] }}</td>
+        <td>{{ row['email'] }}</td>
+        <td>{{ row['student_id'] }}</td>
+        <td>{{ row['course'] }}</td>
+        <td>{{ row['department'] }}</td>
+        <td>{{ row['year_semester'] }}</td>
+        <td>{{ row['section_name'] }}</td>
+        <td>{{ row['phone'] }}</td>
+        <td><strong>{{ row['personality_type'] }}</strong></td>
+        <td>{{ row['score_e'] }}</td>
+        <td>{{ row['score_i'] }}</td>
+        <td>{{ row['score_s'] }}</td>
+        <td>{{ row['score_n'] }}</td>
+        <td>{{ row['score_t'] }}</td>
+        <td>{{ row['score_f'] }}</td>
+        <td>{{ row['score_j'] }}</td>
+        <td>{{ row['score_p'] }}</td>
+        <td>{{ row['submitted_at'] }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="19" class="muted">No submissions available yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
